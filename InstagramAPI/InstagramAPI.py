@@ -660,9 +660,21 @@ class InstagramAPI:
         activity = self.SendRequest('news/inbox/?')
         return activity
 
-    def getFollowingRecentActivity(self):
-        activity = self.SendRequest('news/?')
-        return activity
+    def getFollowingRecentActivity(self, maxid):
+        if maxid == '':
+            activity = self.SendRequest('news/?')
+            return activity
+        else:
+            looper = 1
+            followers = []
+            proximo_id = maxid
+            while looper < 5:
+                looper += 1
+                self.SendRequest('news/?' + '&max_id=' + str(proximo_id))
+                temp = self.LastJson
+                for item in temp["stories"]:
+                    followers.append(item)
+                proximo_id = temp["next_max_id"]
 
     def getv2Inbox(self):
         inbox = self.SendRequest('direct_v2/inbox/?')

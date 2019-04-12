@@ -25,8 +25,7 @@ def getImageSize(fname):
                     byte = fhandle.read(1)
                 ftype = ord(byte)
                 size = struct.unpack('>H', fhandle.read(2))[0] - 2
-            # We are at a SOFn block
-            fhandle.seek(1, 1)  # Skip `precision' byte.
+            fhandle.seek(1, 1)
             height, width = struct.unpack('>HH', fhandle.read(4))
         else:
             raise RuntimeError("Unsupported format")
