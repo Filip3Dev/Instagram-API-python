@@ -676,6 +676,7 @@ class InstagramAPI:
                 for item in temp["stories"]:
                     followers.append(item)
                 proximo_id = temp["next_max_id"]
+            return followers
 
     def getv2Inbox(self):
         inbox = self.SendRequest('direct_v2/inbox/?')
