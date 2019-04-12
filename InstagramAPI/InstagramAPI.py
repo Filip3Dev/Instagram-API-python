@@ -660,7 +660,7 @@ class InstagramAPI:
         activity = self.SendRequest('news/inbox/?')
         return activity
 
-    def getFollowingRecentActivity(self, maxid):
+    def getFollowingRecentActivity(self, maxid=''):
         if maxid == '':
             activity = self.SendRequest('news/?')
             return activity
@@ -672,6 +672,7 @@ class InstagramAPI:
                 looper += 1
                 self.SendRequest('news/?' + '&max_id=' + str(proximo_id))
                 temp = self.LastJson
+
                 for item in temp["stories"]:
                     followers.append(item)
                 proximo_id = temp["next_max_id"]
